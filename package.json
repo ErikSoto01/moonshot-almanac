@@ -1,0 +1,16 @@
+{
+  "name": "moonshot-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Website for the Moonshot Almanac Facebook Page",
+  "type": "module",
+  "scripts": {
+    "week": "node tools/week.js",
+    "images": "node tools/images.js",
+    "check": "node tools/check.js",
+    "serve": "node tools/serve.js"
+  },
+  "dependencies": {
+    "astronomy-engine": "^2.1.19"
+  }
+}

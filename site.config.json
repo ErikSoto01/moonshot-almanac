@@ -1,0 +1,98 @@
+{
+  "siteUrl": "https://eriksoto01.github.io/moonshot-almanac/",
+  "facebookUrl": "https://www.facebook.com/profile.php?id=61594573576455",
+  "contactEmail": "moonshotalmanac@gmail.com",
+  "gallery": [
+    {
+      "slug": "welcome",
+      "src": "out/posts/post-welcome.jpg",
+      "tag": "Photo",
+      "caption": "Welcome to Moonshot Almanac",
+      "alt": "Welcome to Moonshot Almanac. Fridays: This week's sky. Sundays: Space-age stories. Tuesdays: Sky history. Accurate, calm, no hype, with sources in every caption."
+    },
+    {
+      "slug": "reel-phone-camera",
+      "src": "out/reel04-phone-camera/cover.jpg",
+      "crop": true,
+      "tag": "Reel",
+      "caption": "Your phone camera was built for space",
+      "alt": "Reel cover: Your phone camera was built for space. Well, the chip inside it was. An illustration of a phone's camera."
+    },
+    {
+      "slug": "venus-day",
+      "src": "out/posts/post-fact-venus.jpg",
+      "tag": "Strange but True",
+      "caption": "A day on Venus is longer than its year",
+      "alt": "Strange but true: 243 is greater than 225. A day on Venus, 243 Earth days, is longer than its year of 225 days, and Venus spins backward."
+    },
+    {
+      "slug": "reel-saturn",
+      "src": "out/reel01-saturn/cover.jpg",
+      "crop": true,
+      "tag": "Reel",
+      "caption": "That's not a star: Saturn at its brightest",
+      "alt": "Reel cover: That's not a star. Look east tonight at 9:30 p.m. A star chart shows Saturn above the east-southeast horizon."
+    },
+    {
+      "slug": "saturn-chart",
+      "src": "out/posts/post-skychart-oct3.jpg",
+      "tag": "This Week's Sky",
+      "caption": "Find Saturn at its brightest",
+      "alt": "Star chart: find Saturn at its brightest on Saturday, October 3 at 9:30 p.m. local time. Face east-southeast, look about three fists up, and the steady golden light is Saturn."
+    },
+    {
+      "slug": "reel-moon-mirrors",
+      "src": "out/reel05-moon-mirrors/cover.jpg",
+      "crop": true,
+      "tag": "Reel",
+      "caption": "There are mirrors on the Moon",
+      "alt": "Reel cover: There are mirrors on the Moon, and scientists still use them. A laser beam travels from Earth to the Moon."
+    },
+    {
+      "slug": "reel-sputnik",
+      "src": "out/reel02-sputnik/cover.jpg",
+      "crop": true,
+      "tag": "Reel",
+      "caption": "The sound that scared America in 1957",
+      "alt": "Reel cover: This sound scared America. A green waveform of Sputnik's radio beep, October 4, 1957."
+    },
+    {
+      "slug": "earth-moon-scale",
+      "src": "out/posts/post-scale-earth-moon.jpg",
+      "tag": "Strange but True",
+      "caption": "Earth and the Moon, to scale",
+      "alt": "True to scale: if Earth were a 1-inch marble, the Moon would be a pea 30 inches away. Earth is 7,918 miles wide, the Moon 2,159, and they're 238,855 miles apart."
+    },
+    {
+      "slug": "reel-weekdays",
+      "src": "out/reel03-weekdays/cover.jpg",
+      "crop": true,
+      "tag": "Reel",
+      "caption": "Saturday is Saturn's day",
+      "alt": "Reel cover: Saturday equals Saturn's day. And the rest of your week? An illustration of Saturn and its rings."
+    },
+    {
+      "slug": "reel-nasa-myths",
+      "src": "out/reel06-nasa-myths/cover.jpg",
+      "crop": true,
+      "tag": "Reel",
+      "caption": "NASA didn't invent Velcro",
+      "alt": "Reel cover: NASA didn't invent Velcro. The claim 'NASA invented Velcro' is stamped MYTH: a Swiss engineer got the idea from burrs on his dog in 1941."
+    },
+    {
+      "slug": "apollo-memory",
+      "src": "out/posts/post-fact-apollo-memory.jpg",
+      "tag": "Strange but True",
+      "caption": "Apollo 11's computer had about 4 KB of memory",
+      "alt": "Strange but true: 4 KB. Apollo 11's guidance computer had about 4 kilobytes of working memory, and its programs lived in hand-woven core rope memory."
+    },
+    {
+      "slug": "reel-far-side",
+      "src": "out/reel07-far-side/cover.jpg",
+      "crop": true,
+      "tag": "Reel",
+      "caption": "The dark side of the Moon isn't dark",
+      "alt": "Reel cover: The dark side of the Moon isn't dark. 67 years ago today, we first saw it. A diagram shows sunlight reaching the Moon's far side."
+    }
+  ]
+}
