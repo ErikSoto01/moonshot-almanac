@@ -4,13 +4,6 @@
   "contactEmail": "moonshotalmanac@gmail.com",
   "gallery": [
     {
-      "slug": "welcome",
-      "src": "out/posts/post-welcome.jpg",
-      "tag": "Photo",
-      "caption": "Welcome to Moonshot Almanac",
-      "alt": "Welcome to Moonshot Almanac. Fridays: This week's sky. Sundays: Space-age stories. Tuesdays: Sky history. Accurate, calm, no hype, with sources in every caption."
-    },
-    {
       "slug": "reel-phone-camera",
       "src": "out/reel04-phone-camera/cover.jpg",
       "crop": true,

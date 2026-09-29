@@ -45,7 +45,7 @@ const WEEK = `      <div class="week-head">
         </div>
         <p class="basis">Clock times for events are Central Time (${esc(week.zone)}). “Look” times are your local clock time and work across the lower 48. Positions computed for ${esc(week.location.label)}.</p>
       </div>
-      <p class="stale" id="stale" hidden>This guide covered ${esc(week.range)}. A new one goes up every Friday on <a href="${esc(FB)}" rel="noopener">our Facebook Page</a>, and here soon after.</p>
+      <p class="stale" id="stale" hidden>This guide covered ${esc(week.range)}. A new one goes up every Friday on <a href="${esc(FB)}" rel="noopener">Facebook</a>, and here soon after.</p>
       <div class="week-grid" data-week-end="${week.end}">
 ${L && fs.existsSync(path.join(ROOT, chartFile)) ? `        <figure class="plate">
           <img src="${chartFile}?v=${VERSION}" width="1440" height="960" alt="${esc(chartAlt)}" loading="lazy" decoding="async">
@@ -66,9 +66,10 @@ ${items.map(g => `        <li><figure>
         </figure></li>`).join("\n")}
       </ul>`;
 
-const CONTACT = cfg.contactEmail
-  ? `Email <a href="mailto:${esc(cfg.contactEmail)}">${esc(cfg.contactEmail)}</a>, or message the Page on Facebook.`
-  : `The quickest way to reach us is a <a href="${esc(FB)}" rel="noopener">message on our Facebook Page</a>.`;
+if (!cfg.contactEmail) throw new Error("Set contactEmail in site.config.json: it's the site's only contact.");
+const MAIL = `<a href="mailto:${esc(cfg.contactEmail)}">${esc(cfg.contactEmail)}</a>`;
+const CONTACT = `Questions, sky photos, corrections, or brand and partnership inquiries: email us at ${MAIL}.`;
+const CONTACT_LINK = `Email us at ${MAIL}.`;
 
 const ld = [
   { "@context": "https://schema.org", "@type": "WebSite", name: "Moonshot Almanac", url: SITE, description: "This week's night sky for U.S. skywatchers, plus true space-age stories." },
@@ -86,7 +87,8 @@ const html = read("src/index.html")
   .replace("{{JSON_LD}}", JSON.stringify(ld).replace(/</g, "\\u003c"))
   .replace("{{WEEK}}", WEEK)
   .replace("{{GALLERY}}", GALLERY)
-  .replace("{{CONTACT}}", CONTACT);
+  .replace("{{CONTACT}}", CONTACT)
+  .replace("{{CONTACT_LINK}}", CONTACT_LINK);
 if (/\{\{[A-Z_]+\}\}/.test(html)) throw new Error("Unfilled placeholder: " + html.match(/\{\{[A-Z_]+\}\}/)[0]);
 fs.writeFileSync(path.join(ROOT, "index.html"), html);
 fs.writeFileSync(path.join(ROOT, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${SITE}</loc><lastmod>${week.generated.slice(0, 10)}</lastmod><changefreq>weekly</changefreq></url></urlset>\n`);
