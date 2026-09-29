@@ -35,6 +35,17 @@ git switch -c week-2026-10-09 && git commit -am "Sky guide: week of Oct 9" && gi
 
 Merge the PR after the "Site checks" run passes. GitHub Pages redeploys in about a minute. If you don't update it, the site says so: once the week has passed, it shows a note pointing visitors to the Facebook Page.
 
+## Newsletter and contact forms
+
+Both forms work right away in "email app" mode: the visitor's email app opens with the signup or message filled in and addressed to `contactEmail`. To have the forms send straight from the page, add these keys to `site.config.json`, then run `node tools/build.js`:
+
+- **Newsletter → Kit** (free up to 10,000 subscribers). In Kit, go to Grow → Landing Pages & Forms → Create new → Form → Inline. Pick any template and save it. Under Publish → HTML, the embed code contains `app.kit.com/forms/<number>/subscriptions`. Put that number in `newsletter.kitFormId`. Kit sends the confirmation ("double opt-in") email and adds an unsubscribe link to every issue. If you turn off "Send incentive email" in Kit, set `newsletter.doubleOptIn` to `false`.
+- **Contact → Web3Forms** (free for 250 messages a month). Enter `contactEmail` on web3forms.com to get an access key by email, and put it in `contact.web3formsKey`. Messages arrive in that inbox, and hitting Reply answers the sender.
+
+The Kit form ID and the Web3Forms access key are meant to be public, since they sit in the page source. They are not passwords. The privacy note on the page updates automatically to match whichever mode each form is in.
+
+To test other settings without touching the live page: `SITE_CONFIG=/path/to/test.json OUT=test.html node tools/build.js`.
+
 ## Other commands
 
 - `npm run images`: refreshes the gallery thumbnails, the link-preview image and the favicons from the studio's `out/` folder (needs `ffmpeg` and `cwebp`: `brew install ffmpeg webp`). Edit the `gallery` list in `site.config.json` to change which posts appear.

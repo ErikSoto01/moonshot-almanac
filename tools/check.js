@@ -18,6 +18,13 @@ for (const r of new Set(refs)) { const f = path.join(ROOT, r.split("?")[0]); if 
 // every image has alt text; every in-page link has a target
 for (const m of html.matchAll(/<img\b[^>]*>/g)) if (!/\balt="[^"]*"/.test(m[0])) fail.push(`img without alt: ${m[0].slice(0, 80)}`);
 for (const m of html.matchAll(/href="#([^"]+)"/g)) if (!html.includes(`id="${m[1]}"`)) fail.push(`link to missing #${m[1]}`);
+// every visible form control has a matching <label for>
+for (const m of html.matchAll(/<(input|select|textarea)\b[^>]*>/g)) {
+  if (/type="(hidden|checkbox)"/.test(m[0]) && /type="hidden"|class="hp"/.test(m[0])) continue;
+  const id = (m[0].match(/\bid="([^"]+)"/) || [])[1];
+  if (!id || !html.includes(`for="${id}"`)) fail.push(`form control without a label: ${m[0].slice(0, 80)}`);
+}
+if (!/id="letter-form"/.test(html) || !/id="contact-form"/.test(html)) fail.push("newsletter or contact form missing");
 // no third-party requests (the privacy note promises this)
 for (const m of html.matchAll(/<(?:script|link)\b[^>]*(?:src|href)="(https?:[^"]+)"/g)) if (!m[0].includes('rel="canonical"')) fail.push(`third-party asset: ${m[1]}`);
 // weight budget for what loads up front (lazy gallery images excluded)

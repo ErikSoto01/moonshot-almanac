@@ -2,6 +2,13 @@
   "siteUrl": "https://eriksoto01.github.io/moonshot-almanac/",
   "facebookUrl": "https://www.facebook.com/profile.php?id=61594573576455",
   "contactEmail": "moonshotalmanac@gmail.com",
+  "newsletter": {
+    "kitFormId": "",
+    "doubleOptIn": true
+  },
+  "contact": {
+    "web3formsKey": ""
+  },
   "gallery": [
     {
       "slug": "reel-phone-camera",

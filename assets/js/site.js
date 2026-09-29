@@ -259,6 +259,122 @@
     lb.addEventListener("click", e => { if (e.target === lb) lb.close(); });
   }
 
+  // ---------- newsletter + contact forms ----------
+  // data-provider on each form: "kit" (newsletter service), "web3forms" (contact relay) or "mailto" (visitor's email app).
+  const MESSAGES = {
+    email: "Please enter an email address like name@example.com.",
+    name: "Please tell us your name.",
+    message: "Please write a message.",
+  };
+  function fieldError(input) {
+    if (input.validity.valid) return "";
+    if (input.type === "email") return MESSAGES.email;
+    if (input.name === "name") return MESSAGES.name;
+    if (input.tagName === "TEXTAREA") return MESSAGES.message;
+    return "Please fill this in.";
+  }
+  function showErrors(form) {
+    let first = null;
+    form.querySelectorAll("input[required], textarea[required]").forEach(input => {
+      input.value = input.value.trim() === "" ? "" : input.value;
+      const msg = fieldError(input), err = document.getElementById(input.id + "-err");
+      input.setAttribute("aria-invalid", msg ? "true" : "false");
+      if (err) err.textContent = msg;
+      if (msg && !first) first = input;
+    });
+    if (first) first.focus();
+    return !first;
+  }
+  function setStatus(form, kind, html) {
+    const st = form.querySelector(".status");
+    st.className = "status" + (kind ? " " + kind : "");
+    st.innerHTML = html;
+  }
+  const escHTML = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  async function post(url, data) {
+    const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 15000);
+    try {
+      const r = await fetch(url, { method: "POST", body: data, headers: { Accept: "application/json" }, signal: ctl.signal });
+      let j = {};
+      try { j = await r.json(); } catch { /* not JSON */ }
+      return { ok: r.ok, j };
+    } finally { clearTimeout(timer); }
+  }
+  function mailtoURL(form, lines) {
+    const to = form.dataset.to, topic = form.elements.topic ? `: ${form.elements.topic.value}` : "";
+    const subject = (new URL(form.action).searchParams.get("subject") || "Moonshot Almanac") + topic;
+    return `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
+  }
+  function wireForm(form, handlers) {
+    if (!form) return;
+    form.noValidate = true; // we show friendlier messages ourselves
+    form.querySelectorAll("input[required], textarea[required]").forEach(i => i.addEventListener("input", () => {
+      if (i.getAttribute("aria-invalid") === "true" && i.validity.valid) { i.setAttribute("aria-invalid", "false"); const e = document.getElementById(i.id + "-err"); if (e) e.textContent = ""; }
+    }));
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+      if (!showErrors(form)) return;
+      const trap = form.querySelector('input[name="website"]');
+      const btn = form.querySelector('button[type="submit"]');
+      if (trap && trap.value) { form.reset(); setStatus(form, "ok", handlers.okText(form)); return; } // bot: pretend it worked
+      const provider = form.dataset.provider;
+      if (provider === "mailto") {
+        window.location.href = mailtoURL(form, handlers.mailtoLines(form));
+        setStatus(form, "ok", handlers.mailtoText(form));
+        return;
+      }
+      const data = new FormData(form);
+      data.delete("website");
+      btn.disabled = true;
+      const label = btn.textContent;
+      btn.textContent = "Sending…";
+      setStatus(form, "", "");
+      try {
+        const { ok, j } = await post(form.action, data);
+        const good = provider === "kit" ? j.status === "success" : ok && j.success === true;
+        if (!good) throw new Error((j.errors && j.errors.messages && j.errors.messages[0]) || (j.body && j.body.message) || j.message || "Request failed");
+        setStatus(form, "ok", handlers.okText(form));
+        form.reset();
+      } catch (err) {
+        console.warn("Form error:", err && err.message);
+        const to = form.dataset.to;
+        setStatus(form, "bad", `Sorry, that didn't go through. Please try again in a moment, or email us at <a href="mailto:${to}">${to}</a>.`);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = label;
+      }
+    });
+  }
+  const nl = document.getElementById("letter-form");
+  wireForm(nl, {
+    okText: f => f.dataset.provider === "kit" && f.dataset.doubleOptIn !== "false"
+      ? "<strong>Almost done!</strong> Check your inbox for a confirmation email from Moonshot Almanac and tap the button inside. (If it's not there in a few minutes, look in Promotions or Spam.)"
+      : "<strong>You're on the list!</strong> Look for this week's sky in your inbox on Friday.",
+    mailtoLines: f => ["Please add me to the Moonshot Almanac newsletter.", "", `Email: ${f.elements.email_address.value.trim()}`, `First name: ${f.elements["fields[first_name]"].value.trim() || "-"}`],
+    mailtoText: f => `Your email app should open with a signup message ready to go. <strong>Just press Send.</strong> If nothing opened, email <a href="mailto:${f.dataset.to}?subject=Newsletter%20signup">${f.dataset.to}</a> with the subject “Newsletter.”`,
+  });
+  const ct = document.getElementById("contact-form");
+  wireForm(ct, {
+    okText: f => `<strong>Thanks${f.elements.name.value.trim() ? ", " + escHTML(f.elements.name.value.trim().split(" ")[0]) : ""}!</strong> Your message is on its way to us, and we'll reply by email.`,
+    mailtoLines: f => [f.elements.message.value.trim(), "", "—", `Name: ${f.elements.name.value.trim()}`, `Email: ${f.elements.email.value.trim()}`, `Topic: ${f.elements.topic.value}`],
+    mailtoText: f => `Your email app should open with your message ready to go. <strong>Just press Send.</strong> If nothing opened, email us at <a href="mailto:${f.dataset.to}">${f.dataset.to}</a>.`,
+  });
+  if (ct) {
+    // topic-specific hints and a subject line that says what the message is about
+    const hints = {
+      "A question about the sky": "Tell us what you saw, roughly when, and where you were (city or state is plenty).",
+      "A correction": "Which post was it, and what should it say? A link to your source helps.",
+      "Sharing a sky photo": "Paste a link to your photo (Google Photos, iCloud, Flickr…) and tell us when and where you took it.",
+      "Brand partnership": "Tell us about your brand, what you have in mind, and your timing.",
+      "Something else": "Tell us as much as you like.",
+    };
+    const topic = ct.elements.topic, hint = document.getElementById("ct-message-hint"), subj = ct.querySelector('input[name="subject"]');
+    const sync = () => { hint.textContent = hints[topic.value] || hints["Something else"]; if (subj) subj.value = `Moonshot Almanac website: ${topic.value}`; };
+    topic.addEventListener("change", sync); sync();
+    ct.addEventListener("reset", () => setTimeout(sync, 0));
+    // after a no-JavaScript Web3Forms submit, the service sends visitors back with ?sent=contact
+    if (new URLSearchParams(location.search).get("sent") === "contact") setStatus(ct, "ok", "<strong>Thanks!</strong> Your message is on its way to us, and we'll reply by email.");
+  }
   // ---------- start ----------
   staleCheck();
   function start() {
