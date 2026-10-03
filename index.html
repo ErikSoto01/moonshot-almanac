@@ -309,8 +309,12 @@
           <div><dt>Follow along</dt><dd><a href="https://www.facebook.com/profile.php?id=61594573576455" rel="noopener">Moonshot Almanac on Facebook</a></dd></div>
         </dl>
       </div>
-      <form class="form contact-form" id="contact-form" action="mailto:moonshotalmanac@gmail.com?subject=Message%20from%20the%20website" method="post" enctype="text/plain" data-provider="mailto" data-to="moonshotalmanac@gmail.com">
-        
+      <form class="form contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="post" data-provider="web3forms" data-to="moonshotalmanac@gmail.com">
+        <input type="hidden" name="access_key" value="31641a4e-cca9-40b0-a92f-d2e1945eece3">
+        <input type="hidden" name="subject" value="Moonshot Almanac website: new message">
+        <input type="hidden" name="from_name" value="Moonshot Almanac website">
+        <input type="hidden" name="redirect" value="https://eriksoto01.github.io/moonshot-almanac/?sent=contact#contact">
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="row2">
           <div class="field">
             <label for="ct-name">Your name</label>
@@ -349,7 +353,7 @@
   <section class="privacy" id="privacy" aria-labelledby="privacy-title">
     <div class="wrap">
       <h2 id="privacy-title">Privacy</h2>
-      <p>This site has no cookies, no analytics, no ads and no trackers. Its fonts and scripts load from this site, not from other companies. If you join the newsletter, your email address (and first name, if you share it) is stored by Kit, the service that sends our emails. We use it only to send the newsletter, and every issue has a one-click unsubscribe link. Messages from the contact form are sent from your own email app to ours; we use your details only to reply. If you tap “Use my location” on the sky chart, your position stays in your browser to draw the chart and is never sent anywhere. The site is hosted on GitHub Pages, which may keep standard server logs (see <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub's privacy statement</a>).</p>
+      <p>This site has no cookies, no analytics, no ads and no trackers. Its fonts and scripts load from this site, not from other companies. If you join the newsletter, your email address (and first name, if you share it) is stored by Kit, the service that sends our emails. We use it only to send the newsletter, and every issue has a one-click unsubscribe link. Messages from the contact form are delivered to our inbox by Web3Forms; we use your details only to reply. If you tap “Use my location” on the sky chart, your position stays in your browser to draw the chart and is never sent anywhere. The site is hosted on GitHub Pages, which may keep standard server logs (see <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub's privacy statement</a>).</p>
     </div>
   </section>
 </main>
