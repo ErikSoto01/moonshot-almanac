@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-29T16:37:10.931Z",
+  "generated": "2026-10-03T00:47:17.920Z",
   "tz": "America/Chicago",
   "zone": "CDT",
   "location": {
@@ -8,45 +8,15 @@
     "elev": 300,
     "label": "the central U.S. (39°N, 95°W)"
   },
-  "start": "2026-09-29",
-  "end": "2026-10-05",
-  "range": "Tue, Sep 29 – Mon, Oct 5, 2026",
+  "start": "2026-10-02",
+  "end": "2026-10-08",
+  "range": "Fri, Oct 2 – Thu, Oct 8, 2026",
   "sun": {
     "sunset": "7:00 p.m.",
     "sunrise": "7:15 a.m.",
-    "day": "Fri, Oct 2"
+    "day": "Mon, Oct 5"
   },
   "events": [
-    {
-      "id": "moon-thepleiades",
-      "kind": "pair",
-      "tag": "Moon",
-      "date": "2026-09-30",
-      "time": "Before dawn, around 6:15 a.m.",
-      "title": "The Moon near the Pleiades",
-      "pair": "the Pleiades",
-      "look": {
-        "when": "2026-09-30T11:15:14.807Z",
-        "time": "6:15 a.m.",
-        "alt": 60,
-        "az": 249.2,
-        "dir": "west-southwest",
-        "abbr": "WSW",
-        "label": "Moon"
-      },
-      "body": "Before dawn, around 6:15 a.m., face west-southwest and look about six fists above the horizon: the Moon and the Pleiades are about 5° apart, less than a fist. Binoculars show the cluster's tight knot of stars best. The pair shifts a little each night as the Moon moves.",
-      "dayLabel": "Wed, Sep 30"
-    },
-    {
-      "id": "moon-last",
-      "kind": "moon",
-      "tag": "Moon",
-      "date": "2026-10-03",
-      "time": "8:25 a.m. CDT",
-      "title": "Last Quarter Moon",
-      "body": "Half lit, rising around 11:15 p.m. and high in the south at dawn. Evenings are Moon-free for the week ahead, which is good for stargazing.",
-      "dayLabel": "Sat, Oct 3"
-    },
     {
       "id": "opp-saturn",
       "kind": "planet",
@@ -107,9 +77,40 @@
       },
       "body": "Before dawn, around 6:15 a.m., face east-southeast and look about five fists above the horizon: the Moon and Mars are about 4° apart, less than a fist. Mars is a steady orange-red point. The pair shifts a little each night as the Moon moves.",
       "dayLabel": "Mon, Oct 5"
+    },
+    {
+      "id": "moon-jupiter",
+      "kind": "pair",
+      "tag": "Moon",
+      "date": "2026-10-06",
+      "time": "Before dawn, around 6:15 a.m.",
+      "title": "The Moon right beside Jupiter",
+      "target": "Jupiter",
+      "pair": "Jupiter",
+      "look": {
+        "when": "2026-10-06T11:20:54.860Z",
+        "time": "6:15 a.m.",
+        "alt": 37,
+        "az": 101.6,
+        "dir": "east-southeast",
+        "abbr": "ESE",
+        "label": "Moon"
+      },
+      "body": "Before dawn, around 6:15 a.m., face east-southeast and look about four fists above the horizon: the Moon and Jupiter are about a finger-width apart (a finger at arm's length is about 1°). Jupiter is a bright, steady cream-white point. The pair shifts a little each night as the Moon moves.",
+      "dayLabel": "Tue, Oct 6"
+    },
+    {
+      "id": "meteor-draconid",
+      "kind": "meteor",
+      "tag": "Meteors",
+      "date": "2026-10-08",
+      "time": "Peak expected Thu, Oct 8, around 8 p.m. CDT",
+      "title": "Draconid meteor shower peaks",
+      "body": "Watch the evening of Thu, Oct 8, best from about 8:15 p.m. to 10:00 p.m. From a dark spot away from city lights, expect perhaps 4 meteors an hour at best, fewer from town. Moonlight won't get in the way this year. Lie back, look up at the widest patch of dark sky, and give your eyes 20 minutes; no telescope or binoculars needed.",
+      "dayLabel": "Thu, Oct 8"
     }
   ],
-  "candidates": 6,
+  "candidates": 8,
   "lead": {
     "id": "opp-saturn",
     "when": "2026-10-05T02:27:38.928Z",
